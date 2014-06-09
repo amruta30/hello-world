@@ -1,0 +1,96 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<fstream.h>
+#include<stdlib.h>
+#define MAX 50
+
+int main()
+{
+	clrscr();
+	char input[MAX],command[MAX],data[MAX],command1[MAX],data1[MAX];
+	int choice=0,i=0,j=0,k=0;
+
+	cout<<"\n\n\t NOTE\
+		\n\t Use the command 'append' to add new line\
+		\n\t Use the command 'delete' to delete a line\
+		\n\t Use the command 'svc filename' to commit\
+		\n\t Use the command 'svc N' to retreive Nth record\
+		\n\t Use the command 'exit' to terminate";
+
+	do
+	{
+		cout<<"\n\nCommand:\> ";
+		gets(input);
+
+		while(input[i]!='\0')
+		{
+			if(input[i]==' ')
+			{
+				break;
+			}
+			command[j]=input[i];
+			i++;j++;
+		}
+		command[j]='\0';
+		i++;
+
+		while(input[i]!='\0')
+		{
+			data[k]=input[i];
+			i++;k++;
+		}
+		data[k]='\0';
+
+		//cout<<"\n\t\t**"<<command<<" "<<data;
+
+		if(strcmp(command,"append")==0)
+			choice=1;
+		if(strcmp(command,"delete")==0)
+			choice=2;
+		if(strcmp(command,"svc")==0)
+		{
+			if(strlen(data)==1)	//Nth record
+				choice=4;
+			else
+				choice=3;
+		}
+		else if(strcmp(command,"exit")==0)
+		{
+			choice=0;
+			cout<<"\n\t\t exit!!!";
+		}
+
+		switch(choice)
+		{
+			case 0:
+			break;
+			case 1:
+				cout<<"\n\n\tAppend!!";
+			break;
+			case 2:
+				cout<<"\n\n\tDelete!!";
+			break;
+			case 3:
+				cout<<"\n\n\tCommit the file!!";
+			break;
+			case 4:
+				cout<<"\n\n\tDisplay Nth record!!";
+			break;
+
+			default:
+				cout<<"\n\n\t Illegal command!!";
+		}
+
+		strcpy(input,'\0');
+		strcpy(command,'\0');
+		strcpy(data,'\0');
+
+		i=j=k=0;
+
+	}while(choice!=0);
+
+	getch();
+	return 0;
+}
